@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>派发事件</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+   <div id="app">
+   	 <p>{{message}}</p>
+   	 <child-template v-on:ww="dd"></child-template>
+   </div>
+    <template id="child-template">
+        <div>
+            <input type="text" name="" v-model="msg">
+            <button v-on:click="pf">派发</button>
+        </div>
+    </template>
+    <script type="text/javascript">
+    Vue.component(
+        "child-template", {
+            template: "#child-template",
+            data:function(){
+            	return {
+            		msg:''
+            	}            	
+            },
+            methods:{
+            	pf:function(){
+            		this.$emit('ww',this.msg);
+            		this.msg=''
+            	}
+            }
+        }
+    )
+    new Vue({
+    	el:"#app",
+    	// data:function(){
+    	// 	return{
+    	// 		message:''
+    	// 	} 
+    	data:{
+    		message:[]	
+    	},
+    	methods:{
+    		dd:function(msg){
+    			this.message.push(msg)
+    		}
+    	}
+    })
+    </script>
+</body>
+
+</html>
